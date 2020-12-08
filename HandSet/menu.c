@@ -43,7 +43,7 @@ void inv_linea(unsigned char line, unsigned char ini_col, unsigned char end_col 
 /*-------------------------------------------------------------------------------*/
 /* Navegacion dentro de un menu                                                  */
 /*-------------------------------------------------------------------------------*/
-unsigned char menu_navpg (unsigned char num_opt, unsigned char type_pg) 
+unsigned char menu_navpg (unsigned char num_opt, unsigned char type_pg)
 {// Se le pasa como parametro la tecla y el numero de paginas
  unsigned char tecla, dtecla;
  READ_KEY(tecla,dtecla);
@@ -73,7 +73,7 @@ unsigned char menu_navpg (unsigned char num_opt, unsigned char type_pg)
 /*-------------------------------------------------------------------------------*/
 /* Ingresa datos                                                                 */
 /*-------------------------------------------------------------------------------*/
-unsigned char menu_datain ( unsigned char cant_dat, char *sep) 
+unsigned char menu_datain ( unsigned char cant_dat, char *sep)
 {// Se le pasa como parametro la cantidad de datos (ingresados de a uno) y el separador
  unsigned char i, tecla, tecla_cod;
  unsigned char dec_aux;
@@ -110,7 +110,7 @@ unsigned char menu_datain ( unsigned char cant_dat, char *sep)
 /*-------------------------------------------------------------------------------*/
 /* Imprime datos formateados en pantalla desde un vector                         */
 /*-------------------------------------------------------------------------------*/
-void menu_dataout ( unsigned char size, unsigned char sgn, char *sep,...) 
+void menu_dataout ( unsigned char size, unsigned char sgn, char *sep,...)
 {// Se le pasa como parametro la cantidad de datos (ingresados de a uno) y el separador
  // Los numeros son de dos cifras nada mas
  int i;
@@ -152,7 +152,7 @@ void menu_dataout ( unsigned char size, unsigned char sgn, char *sep,...)
 /*-------------------------------------------------------------------------------*/
 /* Ingresa un nombre                                                             */
 /*-------------------------------------------------------------------------------*/
-unsigned char menu_namein (char * name) 
+unsigned char menu_namein (char * name)
 {// Se le pasa como parametro un puntero al vector donde estará el nombre
  unsigned char tecla_ant=0xFF, tecla_cod, tecla_rep=0, tecla;
  unsigned char i=0xFF;
@@ -215,7 +215,7 @@ char menu_sfdat (char * val, unsigned char rettype, unsigned char size)
 	 READ_KEY(tecla,dtecla);
 	 switch(tecla)
 		{
-		 case BUT_UP:  
+		 case BUT_UP:
 			 i++;
 			 if (i==size)
 				i=0;
@@ -267,7 +267,7 @@ unsigned char menu_sfelm (const obj_ceqs *list, unsigned char size)
 	 READ_KEY(tecla,dtecla);
 	 switch(tecla)
 		{
-		 case BUT_RT: 
+		 case BUT_RT:
 			dir=1;
 		 break;
 		 case BUT_LT: // Si aprieta las direcciones, modifica y valida
@@ -303,7 +303,7 @@ void mv_cursor(unsigned char tecla, unsigned char end_opt)
 		{
 		 if (menu_opt==1) // limite superior
 			 menu_opt=end_opt;
-		 else 
+		 else
 		 	 menu_opt--;
 		}
 	 else
@@ -390,13 +390,13 @@ obj_ceqs find_obj(char * name, unsigned char size)
 				}
 			}
 	 break;
-	 case PG_B_IC: 
+	 case PG_B_IC:
 		r=find_obj_in_file("IC.csv",name,size);
 	 break;
-	 case PG_B_NGC: 
+	 case PG_B_NGC:
 		r=find_obj_in_file("NGC.csv",name,size);
 	 break;
-	 case PG_B_MES: 
+	 case PG_B_MES:
 		r=find_obj_in_file("MESSIER.csv",name,size);
 	 break;
 	}
@@ -438,7 +438,7 @@ obj_ceqs find_obj_in_file(const char* file, char *name, unsigned char size)
  struct fat_dir_struct* dd = fat_open_dir(fs, &directory);
  if (!dd)
 	{
-	 lcd_string_P(PSTR("Root directory failed\n"));	 
+	 lcd_string_P(PSTR("Root directory failed\n"));
 	 return r;
 	}
 
@@ -497,13 +497,13 @@ obj_ceqs find_obj_in_file(const char* file, char *name, unsigned char size)
 		 paux = strtok( buffer," ");    // Primera llamada => Primer token
 		 strcpy(r.name,paux);
 
-		 paux = strtok(NULL," ");    
+		 paux = strtok(NULL," ");
 		 r.ra.h=strtolong(paux);
 
-		 paux = strtok(NULL," ");    
+		 paux = strtok(NULL," ");
 		 r.ra.m=strtolong(paux);
 
-		 paux = strtok(NULL," "); 
+		 paux = strtok(NULL," ");
 		 r.ra.s=strtolong(paux);
 
 		 paux = strtok(NULL," ");
@@ -520,13 +520,13 @@ obj_ceqs find_obj_in_file(const char* file, char *name, unsigned char size)
 			 r.dec.s=-1;
 			}
 
-		 paux = strtok(NULL," ");    
+		 paux = strtok(NULL," ");
 		 r.dec.d=strtolong(paux)*r.dec.d;
 
-		 paux = strtok(NULL," ");    
+		 paux = strtok(NULL," ");
 		 r.dec.m=strtolong(paux)*r.dec.m;
 
-		 paux = strtok(NULL," ");    
+		 paux = strtok(NULL," ");
 		 r.dec.s=strtolong(paux)*r.dec.s;
 		 break;
 		}
@@ -592,7 +592,7 @@ void menu_print(unsigned pag)
 		case PG_B_CE: // Catalogos Estelares - Lista de catalogos disponibles
 			 lcd_bmp(&p00012_Busqueda[0]);
 		break;
-			case PG_B_MES: 
+			case PG_B_MES:
 				 lcd_bmp(&p00121_Busqueda[0]);
 				 lcd_setcursor(STR_CUR,0);
 			break;
@@ -622,12 +622,12 @@ void menu_print(unsigned pag)
 			break;
 				case PG_B_SSOLB: case PG_B_ICB: case PG_B_MESB: case PG_B_NGCB: case PG_B_OC1B: case PG_B_OC2B: case PG_B_OC3B: case PG_B_OC4B: case PG_U_MODMB: //case PG_TOURB:
 					lcd_bmp(&p01xx1_Busqueda[0]);
-						
+
 				break;
 	 case PG_CONF: //Pantalla de configuración
 		 lcd_bmp(&p00002_Configuracion[0]); // Si la imagen es de 128x64 no hace falta borrar la pantalla.
 	 break;
-	 
+
 		 case PG_C_TIM: //Pantalla de Fecha y Hora
 			 lcd_bmp(&p00022_Fechayhora[0]); // Si la imagen es de 128x64 no hace falta borrar la pantalla.
 			 lcd_setcursor(STR_CUR+2,0); // Fecha
@@ -645,7 +645,7 @@ void menu_print(unsigned pag)
 			 lcd_putchar(' ');
 			 lcd_putchar(lat.s);
 			 inv_linea(0,STR_CUR,END_CUR);
-			 lcd_setcursor(STR_CUR+2,2); 
+			 lcd_setcursor(STR_CUR+2,2);
 			 if (lon.d<100)
 				lcd_putchar('0');
 			 menu_dataout(2,PRINT_NSIGN,&sym_dec[0],lon.d,lon.m);
@@ -672,13 +672,13 @@ void menu_print(unsigned pag)
 			 lcd_bmp(&p00023_Alineacion[0]); // Deberia ser una pantalla de presentacion a la cuestion
 		 break;
 			 case PG_C_ALM1:
-				 lcd_bmp(&p00231_Alineacion[0]); 
+				 lcd_bmp(&p00231_Alineacion[0]);
 			 break;
 			 case PG_C_ALM2:
-				 lcd_bmp(&p00232_Alineacion[0]); 
+				 lcd_bmp(&p00232_Alineacion[0]);
 			 break;
 			 case PG_C_ALM3:
-				 lcd_bmp(&p00233_Alineacion[0]); 
+				 lcd_bmp(&p00233_Alineacion[0]);
 			 break;
 	 case PG_UTIL:
 		lcd_bmp(&p00003_Utilidades[0]);

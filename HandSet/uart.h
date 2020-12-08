@@ -31,7 +31,7 @@
 #define MANUAL		1
 
 // Tipo de variable para comunicacion con PC
-typedef struct  
+typedef struct
 {
  unsigned char cmd;     // Comando
  signed char sign;
@@ -41,7 +41,7 @@ typedef struct
 
 
 //void uart_printchar(char, FILE *);
-void uart_init (void); 
+void uart_init (void);
 void uart_send(unsigned char, char *,...);
 void uart_TxByte(char) ;
 void autoresp_init(void);

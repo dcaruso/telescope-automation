@@ -17,7 +17,7 @@
 #include "util.h"
 
 volatile unsigned char CursorX, CursorY;
-volatile unsigned char lcd_state=LCD_CLEAR; 
+volatile unsigned char lcd_state=LCD_CLEAR;
 //**********************************
 //** Seteo la posicion del cursor **
 //**********************************
@@ -34,7 +34,7 @@ void lcd_setcursor (unsigned char Columna, unsigned char Linea)
  else
    {
     set_bit(IZQ, LCD_SIDE);
-    clr_bit(DER, LCD_SIDE); 
+    clr_bit(DER, LCD_SIDE);
    }
  lcd_wrcom(X_INI | Columna);
  lcd_wrcom(Y_INI | Linea);
@@ -67,7 +67,7 @@ unsigned char lcd_rdat(void)
  set_bit(DI_O,LCD_wCTRL);
  set_bit(E_O,LCD_wCTRL);
  delay_5us;
- 
+
  rdata=LCD_rDATO; //rDATO;      // Dato a descartar
  clr_bit(E_O,LCD_wCTRL);    // Valida el comando.
 /* set_bit(RW_O,LCD_wCTRL);*/
@@ -150,11 +150,11 @@ void lcd_clr(void)
        {
         lcd_wrdat(0,0); // Sin lectura previa
        }
-    CursorX = 0;   
+    CursorX = 0;
    }
- lcd_setcursor(0,0);  
+ lcd_setcursor(0,0);
 }
- 
+
 //***********************************
 //** Selecciona la Font que quiere **
 //***********************************
@@ -229,7 +229,7 @@ void lcd_string (char *frase)
     {
      if ((*frase)=='\n')
         lcd_setcursor(0,CursorY+1);  // Columna cero, siguiente linea
-     else 
+     else
        {
         if ((*frase)=='\r')
            lcd_setcursor(0,CursorY);  // Retorno de carro

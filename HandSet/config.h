@@ -29,7 +29,7 @@
 #define C2				4    /* CHIP SELECT 2 */
 #define LCD_wDATO		PORTA // Si no esta particionado, es un puerto completo
 #define LCD_rDATO		PINA
-#define LCD_dDATO		DDRA 
+#define LCD_dDATO		DDRA
 #define DER				C2
 #define IZQ				C1
 #define LCD_wBKL		PORTD // Backligth del LCD

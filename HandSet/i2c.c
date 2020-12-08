@@ -42,13 +42,13 @@ unsigned char i2c_start(int type)
 unsigned char i2c_sendAddress(unsigned char address)
 {
  unsigned char STATUS;
-   
- if ((address & 0x01) == 0) 
+
+ if ((address & 0x01) == 0)
     STATUS = MT_SLA_ACK;
  else
-    STATUS = MR_SLA_ACK; 
-   
- TWDR = address; 
+    STATUS = MR_SLA_ACK;
+
+ TWDR = address;
  TWCR = (1<<TWINT)|(1<<TWEN);	   //Load SLA_W into TWDR Register. Clear TWINT bit
    		  			 				   //in TWCR to start transmission of address
  while (!END_I2C);	   //Wait for TWINT flag set. This indicates that the
@@ -56,7 +56,7 @@ unsigned char i2c_sendAddress(unsigned char address)
 									   //ACK/NACK has been received.
  if ((TWSR & MSK_TWSR) == STATUS)	   //Check value of TWI Status Register
     return(I2C_OK);
- else 
+ else
 	{
 	 i2c_stop();
 	 return (I2C_ERROR);
@@ -68,7 +68,7 @@ unsigned char i2c_sendAddress(unsigned char address)
 //*************************************************
 unsigned char i2c_sendData(unsigned char data)
 {
- TWDR = data; 
+ TWDR = data;
  TWCR = (1<<TWINT) |(1<<TWEN);	   //Load SLA_W into TWDR Register. Clear TWINT bit
    		  			 				   //in TWCR to start transmission of data
  while (!END_I2C);	   //Wait for TWINT flag set. This indicates that the
@@ -89,7 +89,7 @@ unsigned char i2c_sendData(unsigned char data)
 unsigned char i2c_receiveData_ACK(void)
 {
  TWCR = (1<<TWEA)|(1<<TWINT)|(1<<TWEN);
-  
+
  while (!END_I2C);	   	   //Wait for TWINT flag set. This indicates that the
    		 		   					   //data has been received
  if ((TWSR & MSK_TWSR) != MR_DATA_ACK)    //Check value of TWI Status Register
@@ -107,9 +107,9 @@ unsigned char i2c_receiveData_ACK(void)
 unsigned char i2c_receiveData_NACK(void)
 {
 //  unsigned char data;
-  
+
   TWCR = (1<<TWINT)|(1<<TWEN);
-  
+
   while (!(TWCR & (1<<TWINT)));	   	   //Wait for TWINT flag set. This indicates that the
    		 		   					   //data has been received
   if ((TWSR & MSK_TWSR) != MR_DATA_NACK)    //Check value of TWI Status Register
@@ -122,9 +122,9 @@ unsigned char i2c_receiveData_NACK(void)
 }
 //**************************************************
 //Function to end the i2c communication
-//*************************************************   	
+//*************************************************
 void i2c_stop(void)
 {
   TWCR =  (1<<TWINT)|(1<<TWEN)|(1<<TWSTO);	  //Transmit STOP condition
-}  
+}
 

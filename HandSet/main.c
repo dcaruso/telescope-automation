@@ -59,7 +59,7 @@ int main(void)
  lcd_string_P(PSTR("    Pulse ENTER"));
  inv_linea(3,64,CursorX+1);
  lcd_string_P(PSTR("\n    para comenzar"));
- 
+
  do
 	{
 	 READ_KEY(tecla,dtecla);
@@ -71,7 +71,7 @@ int main(void)
  start_anim(42,0,70,ANIM_UTN);
  sound_ok();
  delay_ms(1000);
- 
+
  // Prueba del backligth
  set_bit(LCD_BKL,LCD_wBKL);
  lcd_setcursor(0,0);
@@ -96,11 +96,11 @@ int main(void)
 	{
 	 switch (menu_pg)
 		{
-//- Pantalla Principal 
+//- Pantalla Principal
 		 case PG_PRINC: // 0.0.0.0
 			menu_navpg(OPT_PRINC,NAV_PG);
 		 break;
-//- Pantalla de Busqueda General 
+//- Pantalla de Busqueda General
 		 case PG_BUSQ: // 1.0.0.0
 			menu_navpg(OPT_BUSQ,NAV_PG);
 		 break;
@@ -208,7 +208,7 @@ int main(void)
 		 case PG_C_PGE:
 			 if (menu_navpg(OPT_CPGE,CONF_PG)==1) // Pregunta si pulso enter
 				{
-				 lcd_setcursor(STR_CUR+2,OPT2LINE(menu_opt)); 
+				 lcd_setcursor(STR_CUR+2,OPT2LINE(menu_opt));
 				 if (menu_opt==1) // Latitud
 					{
 					 menu_aux[0] = lat.d;menu_aux[1]=lat.m;
@@ -304,7 +304,7 @@ int main(void)
 			n=0;
 		break;
 
-		case PG_C_ALE3: 
+		case PG_C_ALE3:
 			 lcd_setcursor(STR_CUR+2,1);
 			 READ_KEY(tecla,dtecla);
 			 menu_print(menu_pg);
@@ -388,9 +388,9 @@ int main(void)
 					 case 2: // Carga la DEC
 						 lcd_setcursor(STR_CUR+2,OPT2LINE(menu_opt));
 						 if ((objb.dec.d<0)||(objb.dec.m<0)||(objb.dec.s<0))
-							 aux= (menu_sfdat("-+",RNUM,2)<<1)-1; // Lo usa de backUP 
+							 aux= (menu_sfdat("-+",RNUM,2)<<1)-1; // Lo usa de backUP
 						 else
-							 aux= 1-((menu_sfdat("+-",RNUM,2))<<1); // Lo usa de backUP 
+							 aux= 1-((menu_sfdat("+-",RNUM,2))<<1); // Lo usa de backUP
 						 if((menu_datain(6,&sym_dec[0]))==DAT_VA) // (cant datos, separador, )
 							{objb.dec.s=menu_aux[2]*aux;objb.dec.m=menu_aux[1]*aux;objb.dec.d=menu_aux[0]*aux;}
 					 break;
@@ -398,7 +398,7 @@ int main(void)
 						 if (vis_obj(objb.ra,objb.dec)!=OBJ_VIS)
 							{ERROR_TXT("No visible",0,STR_CUR);}
 						 else
-							{ 
+							{
 							 strcpy_Pe(objb.name,PSTR("Desconocido\0"));
 							 menu_pg=PG_U_MODMB;
 							}

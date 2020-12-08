@@ -12,7 +12,7 @@ typedef struct  // Coordenadas en grados y ubicacion
  unsigned char name; // Nombre de la animacion
  unsigned char state; // Estado
  unsigned char xpos; // Posicion X
- unsigned char ypos; // Posicion X 
+ unsigned char ypos; // Posicion X
 }s_anim;
 
 void start_anim (unsigned char, unsigned char, unsigned, unsigned char);

@@ -15,8 +15,8 @@
    #define SPI_TXD3  5 // Envio Dato 4 - Recibe ACK Dato 3
    #define SPI_TXD4  6 // Envio Dato 5 - Recibe ACK Dato 4
    #define SPI_TXD5  7 // Envio Dato 6 - Recibe ACK Dato 5
-#define SPI_TXEND    8 // Envio Comando Fin - Recibe ACK Dato 6    
- 
+#define SPI_TXEND    8 // Envio Comando Fin - Recibe ACK Dato 6
+
 #define SPI_RXCMD    1    // Rx Comando (Inicio Rx)
    #define SPI_RXD0  2 // Repite Comando - Recibe Dato 1
    #define SPI_RXD1  3 // Repite Dato 1 - Recibe Dato 2
@@ -44,7 +44,7 @@ extern volatile spi_data sdata;
 //    d7    d6    d5    d4    d3    d2    d1    d0
 //   S/R    A2    A1    A0    C0    S2    S1    S0
 
-// S/R = Set / Read 
+// S/R = Set / Read
 // A[2-0] = Direccion del comando
 // C[0] = Parametros variantes del comando
 // S[2-0] = Tamaño de la trama de datos del comando - 1
@@ -77,24 +77,24 @@ extern volatile spi_data sdata;
 #define SPOSTEL      0xBD
 //      Comando              1 0 1 1  T 1 0 1 (T=0: Origen; T=1: No es Origen)
 //        Respuesta Esclavo => ACK (Basura)
-//      Coordenada AR h => [1 Byte] 
+//      Coordenada AR h => [1 Byte]
 //        Respuesta Esclavo => ACK (al comando)
-//      Coordenada AR ' => [1 Byte] 
+//      Coordenada AR ' => [1 Byte]
 //        Respuesta Esclavo => ACK (a AR h)
-//      Coordenada AR " => [1 Byte] 
+//      Coordenada AR " => [1 Byte]
 //        Respuesta Esclavo => ACK (a AR ')
-//      Coordenada DEC º => [1 Byte] 
+//      Coordenada DEC º => [1 Byte]
 //        Respuesta Esclavo => ACK (al AR ")
-//      Coordenada DEC ' => [1 Byte] 
+//      Coordenada DEC ' => [1 Byte]
 //        Respuesta Esclavo => ACK (al DEC º)
-//      Coordenada DEC " => [1 Byte] 
+//      Coordenada DEC " => [1 Byte]
 //        Respuesta Esclavo => ACK (al DEC ')
 //      Fin del comando (FF=OK, EE=Ret) (Esto no seria de mucha utilidad, porque puede retransmitir)
 //        Respuesta Esclavo => ACK (al DEC ")
 
-/**********************/   
+/**********************/
 /* Ir a la coordenada */
-/**********************/   
+/**********************/
 // Uso: Ya puesto en estacion, sirve para situar al telescopio en alguna coordenada
 #define SGOTO        0xC5
 #define SEGON        0x08
@@ -102,17 +102,17 @@ extern volatile spi_data sdata;
 #define SEGOFF       0x00
 //      Comando              1 1 0 0  S 1 0 1 (S=seguimiento [1=ON, 2=OFF])
 //        Respuesta Esclavo => ACK (Basura)
-//      Coordenada AR h => [1 Byte] 
+//      Coordenada AR h => [1 Byte]
 //        Respuesta Esclavo => ACK (al comando)
-//      Coordenada AR ' => [1 Byte] 
+//      Coordenada AR ' => [1 Byte]
 //        Respuesta Esclavo => ACK (a AR h)
-//      Coordenada AR " => [1 Byte] 
+//      Coordenada AR " => [1 Byte]
 //        Respuesta Esclavo => ACK (a AR ')
-//      Coordenada DEC º => [1 Byte] 
+//      Coordenada DEC º => [1 Byte]
 //        Respuesta Esclavo => ACK (al AR ")
-//      Coordenada DEC ' => [1 Byte] 
+//      Coordenada DEC ' => [1 Byte]
 //        Respuesta Esclavo => ACK (al DEC º)
-//      Coordenada DEC " => [1 Byte] 
+//      Coordenada DEC " => [1 Byte]
 //        Respuesta Esclavo => ACK (al DEC ')
 //      Fin del comando (FF=OK, EE=Ret) (Esto no seria de mucha utilidad, porque puede retransmitir)
 //        Respuesta Esclavo => ACK (al DEC ")
@@ -124,7 +124,7 @@ extern volatile spi_data sdata;
 /* Comando Leer estado del motor */
 /*********************************/
 // Uso: Por si el 128 necesita saber si se detuvo el motor.
-#define RMOTST       0x11 
+#define RMOTST       0x11
 //      Comando              0 0 0 1  0 0 0 1
 //        Respuesta Esclavo => ACK (Basura)
 //      Comando nuevamente del maestro (solo para forzar el envio de datos del esclavo)
@@ -137,9 +137,9 @@ extern volatile spi_data sdata;
 //          Fin del comando (AA=OK, BB=Ret) (enviado por el esclavo) Confirma Pasos L
 //    ***  Si esta todo OK termina la comunicacion
 
-/*******************/          
+/*******************/
 /* Leer coordenada */
-/*******************/   
+/*******************/
 // Uso: Para saber en que coordenada ecuatorial esta situado el telescopio
 #define RPOS          0x25
 //      Comando              0 0 1 0  0 1 0 1

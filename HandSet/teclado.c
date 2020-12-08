@@ -27,7 +27,7 @@ void key_init (void)
 }
 
 unsigned char deco_key (unsigned char key)
-{ 
+{
  switch (key)
  	{
  	 case BUT_0:
@@ -93,8 +93,8 @@ ISR (INT4_vect)
        delay_us(2500); // espera a que suelta
       }
     P_wKBRD = COLr; // filas pull-up 0xF0
-    P_dKBRD = FILo; // columnas como salidas 0x0F  
-   }   
+    P_dKBRD = FILo; // columnas como salidas 0x0F
+   }
  set_bit(INTF4,EIFR);// borra el flag de interrupcion
  TCCR3B = (1<<CS30)|(1<<CS32)|(1<<WGM32); // Prende el timer nuevamente
  set_bit(INT4,EIMSK);

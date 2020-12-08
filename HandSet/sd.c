@@ -41,7 +41,7 @@ uint8_t print_disk_info(const struct fat_fs_struct* fs)
  if(!sd_raw_get_info(&disk_info))
 	return 0;
 
- lcd_string_P(PSTR("manuf:  0x")); int2str(disk_info.manufacturer); 
+ lcd_string_P(PSTR("manuf:  0x")); int2str(disk_info.manufacturer);
  lcd_string_P(PSTR("\nserial: 0x")); int2str(disk_info.serial);
  lcd_string_P(PSTR("\nsize:   ")); int2str(disk_info.capacity / 1024 / 1024); lcd_string_P(PSTR("MB\n"));
  return 1;

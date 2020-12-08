@@ -196,7 +196,7 @@ uint8_t sd_raw_init()
 
     /* initialization procedure */
     sd_raw_card_type = 0;
-    
+
     if(!sd_raw_available())
         return 0;
 
@@ -417,7 +417,7 @@ uint8_t sd_raw_send_command(uint8_t command, uint32_t arg)
            sd_raw_send_byte(0xff);
            break;
     }
-    
+
     /* receive response */
     for(uint8_t i = 0; i < 10; ++i)
     {
@@ -452,7 +452,7 @@ uint8_t sd_raw_read(offset_t offset, uint8_t* buffer, uintptr_t length)
         read_length = 512 - block_offset; /* read up to block border */
         if(read_length > length)
             read_length = length;
-        
+
 #if !SD_RAW_SAVE_RAM
         /* check if the requested data is cached */
         if(block_address != raw_block_address)
@@ -499,11 +499,11 @@ uint8_t sd_raw_read(offset_t offset, uint8_t* buffer, uintptr_t length)
             memcpy(buffer, raw_block + block_offset, read_length);
             buffer += read_length;
 #endif
-            
+
             /* read crc16 */
             sd_raw_rec_byte();
             sd_raw_rec_byte();
-            
+
             /* deaddress card */
             unselect_card();
 
@@ -583,7 +583,7 @@ uint8_t sd_raw_read_interval(offset_t offset, uint8_t* buffer, uintptr_t interva
         /* determine byte count to read at once */
         block_offset = offset & 0x01ff;
         read_length = 512 - block_offset;
-        
+
         /* send single block request */
 #if SD_RAW_SDHC
         if(sd_raw_send_command(CMD_READ_SINGLE_BLOCK, (sd_raw_card_type & (1 << SD_RAW_SPEC_SDHC) ? offset / 512 : offset - block_offset)))
@@ -622,11 +622,11 @@ uint8_t sd_raw_read_interval(offset_t offset, uint8_t* buffer, uintptr_t interva
             length -= interval;
 
         } while(read_length > 0 && length > 0);
-        
+
         /* read rest of data block */
         while(read_length-- > 0)
             sd_raw_rec_byte();
-        
+
         /* read crc16 */
         sd_raw_rec_byte();
         sd_raw_rec_byte();
@@ -637,7 +637,7 @@ uint8_t sd_raw_read_interval(offset_t offset, uint8_t* buffer, uintptr_t interva
         offset = offset - block_offset + 512;
 
     } while(!finished);
-    
+
     /* deaddress card */
     unselect_card();
 
@@ -679,7 +679,7 @@ uint8_t sd_raw_write(offset_t offset, const uint8_t* buffer, uintptr_t length)
         write_length = 512 - block_offset; /* write up to block border */
         if(write_length > length)
             write_length = length;
-        
+
         /* Merge the data to write with the content of the block.
          * Use the cached block if available.
          */

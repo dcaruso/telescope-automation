@@ -50,7 +50,7 @@ void int2uart (int c)
 	}
 }
 
-void uart_send(unsigned char size, char *sep,...) 
+void uart_send(unsigned char size, char *sep,...)
 {
  int i;
  va_list vl;
@@ -131,7 +131,7 @@ ISR(USART0_RX_vect)
 				pc[ind_pcwrite].sign=1;
 			 if (c=='-')
 				pc[ind_pcwrite].sign=-1;
-		 break;	
+		 break;
 		}
 	 com_state++;
 	}

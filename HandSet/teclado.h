@@ -26,7 +26,7 @@
 
 
 #define FILr		0xF0  // pull-up en las filas
-#define COLr		0x0F  // 
+#define COLr		0x0F  //
 #define COLo		0x0F  // Pone las columnas como salida
 #define FILo		0xF0  // Pone las filas como salida
 
@@ -62,6 +62,6 @@ static const char __attribute__ ((progmem)) keyCell[10][5] = {{'0',' ',0,0,0},
 //4     5     6     E2     |  <-    x     ->    x
 //                         |
 //7     8     9     E3     |  x     |     x     x
-//                         |        
+//                         |
 //ESC   0     Ent   E4     |  x     x     x     x
 

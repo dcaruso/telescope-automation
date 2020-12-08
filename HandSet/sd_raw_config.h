@@ -49,7 +49,7 @@ extern "C"
 /**
  * \ingroup sd_raw_config
  * Controls MMC/SD access buffering.
- * 
+ *
  * Set to 1 to save static RAM, but be aware that you will
  * lose performance.
  *

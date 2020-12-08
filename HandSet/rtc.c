@@ -17,7 +17,7 @@ void rtc_init(void)
  i2c_init();
  rtc_out1hz();
  set_bit(ISC21,EICRA); // por flanco de subida
- set_bit(ISC20,EICRA); 
+ set_bit(ISC20,EICRA);
  clr_bit(INT1HZ,P_dRTC); // Pone como entrada la interrupcion
  set_bit(INT1HZ,P_wRTC); // Pull-up interno a la entrada de interrupcion
  set_bit(INTF2,EIFR); // borra el flag de interrupcion
@@ -50,7 +50,7 @@ ISR(INT2_vect)
 
 //***********************************************************************
 //Function to read RTC time
-//***********************************************************************    
+//***********************************************************************
 unsigned char rtc_read(void)
 {
  unsigned char data;
@@ -62,45 +62,45 @@ unsigned char rtc_read(void)
 	 return I2C_ERROR;
 
  if ((i2c_sendData(0x00))==I2C_ERROR)
-	 return I2C_ERROR; 
+	 return I2C_ERROR;
 
  if ((i2c_start(REPEAT_START))==I2C_ERROR)
 	 return I2C_ERROR;
 
  if ((i2c_sendAddress(DS1307_R))==I2C_ERROR)
 	 return I2C_ERROR;
- 
+
  data=i2c_receiveData_ACK();
- if (data==I2C_ERROR) 
+ if (data==I2C_ERROR)
 	 return I2C_ERROR;
  t.s = BCD2HEX(data);
- 
+
  data=i2c_receiveData_ACK();
- if (data==I2C_ERROR) 
+ if (data==I2C_ERROR)
 	 return I2C_ERROR;
  t.m = BCD2HEX(data);
- 
+
  data=i2c_receiveData_ACK();
- if (data==I2C_ERROR) 
+ if (data==I2C_ERROR)
 	 return I2C_ERROR;
  t.h = BCD2HEX(data);
- 
+
  data=i2c_receiveData_ACK();
- if (data==I2C_ERROR) 
+ if (data==I2C_ERROR)
 	 return I2C_ERROR;
- 
+
  data=i2c_receiveData_ACK();
- if (data==I2C_ERROR) 
+ if (data==I2C_ERROR)
 	 return I2C_ERROR;
  fecha.d = BCD2HEX(data);
- 
+
  data=i2c_receiveData_ACK();
- if (data==I2C_ERROR) 
+ if (data==I2C_ERROR)
 	 return I2C_ERROR;
  fecha.m = BCD2HEX(data);
- 
+
  data=i2c_receiveData_NACK();
- if (data==I2C_ERROR) 
+ if (data==I2C_ERROR)
 	 return I2C_ERROR;
  fecha.y = BCD2HEX(data);
 
@@ -110,8 +110,8 @@ unsigned char rtc_read(void)
 
 
 //******************************************************************
-//Function to write new time in the RTC 
-//******************************************************************   
+//Function to write new time in the RTC
+//******************************************************************
 unsigned char rtc_writeTime(unsigned char sec, unsigned char min,unsigned char hour)
 {
  i2c_start(START);
@@ -125,8 +125,8 @@ unsigned char rtc_writeTime(unsigned char sec, unsigned char min,unsigned char h
 }
 
 //******************************************************************
-//Function to write new date in the RTC 
-//******************************************************************   
+//Function to write new date in the RTC
+//******************************************************************
 unsigned char rtc_writeDate(unsigned char day, unsigned char month, unsigned char year)
 {
  i2c_start(START);
@@ -141,7 +141,7 @@ unsigned char rtc_writeDate(unsigned char day, unsigned char month, unsigned cha
 
 //***********************************************************************
 //Function to write back-up into RTC
-//***********************************************************************    
+//***********************************************************************
 unsigned char rtc_wrbkp(void)
 {
  i2c_start(START);
@@ -162,7 +162,7 @@ unsigned char rtc_wrbkp(void)
 
 //***********************************************************************
 //Function to read back-up into RTC
-//***********************************************************************    
+//***********************************************************************
 unsigned char rtc_rdbkp(void)
 {
  i2c_start(START);
@@ -189,7 +189,7 @@ unsigned char rtc_rdbkp(void)
 	 tpos=initial_pos();
 	 spi_send(6,SPOSORG,tpos.ra.h,tpos.ra.m,tpos.ra.s,tpos.dec.d,0,0);
 	}
- else 
+ else
 	{
 	 menu_print(PG_C_ALM);
 	}

@@ -30,7 +30,7 @@
 // Paginas del menu
 #define PG_PRINC	0b0000000000000000 // Menu Principal				0.0.0.0
 
-#define PG_BUSQ		0b0000000000000001 // 	Busqueda:					1.0.0.0 
+#define PG_BUSQ		0b0000000000000001 // 	Busqueda:					1.0.0.0
 	#define PG_B_SSOL	0b0000000000001001 // 	Sistema Solar:				1.1.0.0
 		#define PG_B_SSOLE	0b0000000001001001 // 		Objeto encontrado		1.1.1.0
 			#define PG_B_SSOLB	0b0000001001001001 // 		Objeto encontrado		1.1.1.0
@@ -39,10 +39,10 @@
 			#define PG_B_MESE	0b0000001010001001 // 		Objeto encontrado		1.2.1.0
 				#define PG_B_MESB	0b0001010001001001 // 		Objeto encontrado		1.2.1.0
 
-		#define PG_B_IC		0b0000000001010010 // 	IC						
+		#define PG_B_IC		0b0000000001010010 // 	IC
 			#define PG_B_ICE	0b0000001010010001 // 		Objeto encontrado		1.3.1.0
 				#define PG_B_ICB	0b0001010010001001 // 		Objeto encontrado		1.3.1.0
-	
+
 		#define PG_B_NGC	0b0000000001010011 // 	NGC							1.4.0.0
 			#define PG_B_NGCE	0b0000001010011001 // 		Objeto encontrado		1.4.1.0
 				#define PG_B_NGCB	0b0001010011001001 // 		Objeto encontrado		1.4.1.0
@@ -65,7 +65,7 @@
 
 #define PG_CONF		0b0000000000000010 // 	Configuracion				3.0.0.0
 	#define PG_C_PGE	0b0000000000010001 // 		Coordenadas geograficas	3.1.0.0
-	#define PG_C_TIM	0b0000000000010010 // 		Fecha y Hora			3.2.0.0 
+	#define PG_C_TIM	0b0000000000010010 // 		Fecha y Hora			3.2.0.0
 	#define PG_C_ALM		0b0000000000010011 // 		Alineacion				3.3.0.0
 		#define PG_C_ALM1	0b0000000010011001 // 		Alineacion Manual		3.4.1.0
 		#define PG_C_ALM2	0b0000000010011010 // 		Alineacion Manual		3.4.2.0

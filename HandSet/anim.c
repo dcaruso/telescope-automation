@@ -12,7 +12,7 @@ volatile unsigned char pres2;
 void start_anim (unsigned char xpos, unsigned char ypos, unsigned time, unsigned char name)
 {
 // F_CPU=8MHz, min=20mseg max=5100mseg
- OCR2 = (time/20); 
+ OCR2 = (time/20);
  TCNT2 = 0;
  TCCR2 = (1<<CS20)|(1<<CS22)| (1<<WGM21); // Activa el prescaler y modo de trabajo CTC
  set_bit(OCIE2,TIMSK); // Habilita la interrupcion

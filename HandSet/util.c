@@ -7,7 +7,7 @@
 #include "lcd.h"
 
 // Delay en Mili-segundos con chequeo
-// F_CPU=8MHz => Max_delay=8,38seg, Min_delay=0,128mseg 
+// F_CPU=8MHz => Max_delay=8,38seg, Min_delay=0,128mseg
 void delay_ms_ck (int delay)
 {
  delay=delay * 7 + (delay/16)*13;

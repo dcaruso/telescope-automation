@@ -20,7 +20,7 @@
 #define  I2C_OK             0
 
 #define  END_I2C            (TWCR & (1<<TWINT))
-	
+
 #define  DS1307_W			0xD0 // Dirección de escritura del RTC
 #define  DS1307_R			0xD1 // Dirección de lectura del RTC
 
