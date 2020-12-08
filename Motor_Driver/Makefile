@@ -1,13 +1,14 @@
 #!/usr/bin/make
 ###############################################################################
-# Makefile for the project PAD
+# Makefile para el Proyecto del Motor Driver. Permite compilar su código.
 ###############################################################################
 
 ## General Flags
 OBJDIR=output
-PRJ = pad
-MCU = atmega128
-FCPU = 8000000UL
+PRJ = motdrv
+MCUA = m168p
+MCU = atmega168p
+FCPU = 20000000UL
 TARGET = $(OBJDIR)/$(PRJ).elf
 CC = avr-gcc
 OPT = s
@@ -18,7 +19,7 @@ COMMON = -mmcu=$(MCU)
 ## Compile options common for all C compilation units.
 CFLAGS = $(COMMON)
 CFLAGS += -gdwarf-2 -std=gnu99 -DF_CPU=$(FCPU) -O$(OPT) -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
-CFLAGS += -MD -MP -MT $(OBJDIR)/$(*F).o -MF $(OBJDIR)/$(@F).d 
+CFLAGS += -MD -MP -MT $(OBJDIR)/$(*F).o -MF $(OBJDIR)/$(@F).d
 
 ## Assembly specific flags
 ASMFLAGS = $(COMMON)
@@ -39,18 +40,13 @@ HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0 --no-change-warnings
 
 
 ## Libraries
-LIBS = -lm -lc 
-
+LIBS = -lm -lc
 
 ## Objects that must be built in order to link
-SD_OBJ = $(OBJDIR)/partition.o $(OBJDIR)/byteordering.o $(OBJDIR)/fat.o $(OBJDIR)/sd.o $(OBJDIR)/sd_raw.o 
-RTC_OBJ = $(OBJDIR)/i2c.o $(OBJDIR)/rtc.o
-PC_OBJ = $(OBJDIR)/uart.o 
-OBJECTS = $(OBJDIR)/calc.o $(OBJDIR)/lcd.o $(OBJDIR)/teclado.o $(OBJDIR)/util.o $(OBJDIR)/spi_master.o $(OBJDIR)/menu.o $(OBJDIR)/anim.o $(RTC_OBJ) $(SD_OBJ) $(PC_OBJ) $(OBJDIR)/main.o 
-
+OBJECTS = $(OBJDIR)/spi_slave.o $(OBJDIR)/motor.o $(OBJDIR)/calc.o  $(OBJDIR)/main.o
 
 ## Objects explicitly added by the user
-LINKONLYOBJECTS = 
+LINKONLYOBJECTS =
 
 ## Build
 all: $(OBJDIR) $(TARGET) $(OBJDIR)/$(PRJ).hex $(OBJDIR)/$(PRJ).eep $(OBJDIR)/$(PRJ).lss size
@@ -78,7 +74,7 @@ $(OBJDIR)/%.lss: $(TARGET)
 size: ${TARGET}
 	@echo
 	@avr-size -C --mcu=${MCU} ${TARGET}
-	
+
 $(OBJDIR)/$(PRJ).asm: ${TARGET}
 	avr-objdump -S $< > $@
 
@@ -86,27 +82,26 @@ asm: $(OBJDIR)/$(PRJ).asm
 
 ## FUSES
 low_fuse:
-	avrdude -p $(MCU) -c usbtiny  -U lfuse:w:0xCE:m	 #    // grabación de Low Fuse internal clock
+	avrdude -p $(MCUA) -c usbtiny  -U lfuse:w:0xF7:m	 #    // grabación de Low Fuse internal clock
 
 high_fuse:
-	avrdude -p $(MCU) -c usbtiny  -U hfuse:w:0xC9:m	 #    // grabación de High Fuse
+	avrdude -p $(MCUA) -c usbtiny  -U hfuse:w:0xDF:m	 #    // grabación de High Fuse
 
-not_103c:
-	avrdude -p $(MCU) -c usbtiny  -U efuse:w:0xFF:m	 #    // grabación de Low Fuse internal clock
+def_fuse:
+	avrdude -p $(MCUA) -c usbtiny  -U lfuse:w:0x62:m	 #    // grabación de Low Fuse internal clock
 
 erase:
-	avrdude -p $(MCU) -c usbtiny  -e	                #    //borrado del micro
-	
-load_prg: 
-	avrdude -p $(MCU) -c usbtiny  -U flash:w:$(OBJDIR)/$(PRJ).hex:a #    // grabación del programa
-	
-verify:	
-	avrdude -p $(MCU) -c usbtiny  -U flash:v:$(OBJDIR)/$(PRJ).hex:a	#    // verificación
+	avrdude -p $(MCUA) -c usbtiny  -e	                #    //borrado del micro
+
+load_prg:
+	avrdude -p $(MCUA) -c usbtiny  -U flash:w:$(OBJDIR)/$(PRJ).hex:a #    // grabación del programa
+
+verify:
+	avrdude -p $(MCUA) -c usbtiny  -U flash:v:$(OBJDIR)/$(PRJ).hex:a	#    // verificación
 
 ## Clean target
 #.PHONY: clean
 clean:
 	rm -r $(OBJDIR)
-
 
 
